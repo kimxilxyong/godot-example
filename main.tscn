@@ -1,27 +1,51 @@
-[gd_scene format=3]
+[gd_scene load_steps=6 format=3]
 
-[node name="Main" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="Script" path="res://scripts/spinning_cube.gd" id="1_script"]
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -20.0
-offset_right = 120.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Hello, Godot!"
-horizontal_alignment = 1
-vertical_alignment = 1
+[sub_resource type="Environment" id="Environment_scene"]
+background_mode = 1
+background_color = Color(0.035, 0.055, 0.09, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.55, 0.68, 0.8, 1)
+ambient_light_energy = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_cube"]
+size = Vector3(1.7, 1.7, 1.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cube"]
+albedo_color = Color(0.12, 0.72, 0.85, 1)
+metallic = 0.3
+roughness = 0.28
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(30, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.055, 0.09, 0.14, 1)
+roughness = 0.82
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_scene")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(4, 3.2, 5)
+rotation_degrees = Vector3(-20, 35, 0)
+current = true
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -32, 0)
+light_energy = 1.8
+shadow_enabled = true
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1, 0)
+mesh = SubResource("BoxMesh_cube")
+material_override = SubResource("StandardMaterial3D_cube")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.05, 0)
+mesh = SubResource("PlaneMesh_floor")
+material_override = SubResource("StandardMaterial3D_floor")
