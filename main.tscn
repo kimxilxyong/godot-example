@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://ce78832qxinxh"]
 
-[ext_resource type="Script" path="res://scripts/spinning_cube.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cjipngtflmbea" path="res://scripts/spinning_cube.gd" id="1_script"]
 
 [sub_resource type="Environment" id="Environment_scene"]
 background_mode = 1
@@ -9,49 +9,48 @@ ambient_light_source = 3
 ambient_light_color = Color(0.55, 0.68, 0.8, 1)
 ambient_light_energy = 0.7
 
-[sub_resource type="BoxMesh" id="BoxMesh_cube"]
-size = Vector3(1.7, 1.7, 1.7)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cube"]
 albedo_color = Color(0.12, 0.72, 0.85, 1)
 metallic = 0.3
 roughness = 0.28
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
-size = Vector2(30, 30)
+[sub_resource type="BoxMesh" id="BoxMesh_cube"]
+size = Vector3(1.7, 1.7, 1.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
 albedo_color = Color(0.055, 0.09, 0.14, 1)
 roughness = 0.82
 
-[node name="Main" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(30, 30)
+
+[node name="Main" type="Node3D" unique_id=1239434678]
 script = ExtResource("1_script")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=66096982]
 environment = SubResource("Environment_scene")
 
-[node name="CameraOrbit" type="Node3D" parent="."]
-position = Vector3(0, 1, 0)
-rotation_degrees = Vector3(0, 38.66, 0)
+[node name="CameraOrbit" type="Node3D" parent="." unique_id=825843427]
+transform = Transform3D(0.7808667, 0, 0.6246977, 0, 1, 0, -0.6246977, 0, 0.7808667, 0, 1, 0)
 
-[node name="CameraPitch" type="Node3D" parent="CameraOrbit"]
-rotation_degrees = Vector3(-18.9, 0, 0)
+[node name="CameraPitch" type="Node3D" parent="CameraOrbit" unique_id=146931767]
+transform = Transform3D(1, 0, 0, 0, 0.94608533, 0.32391742, 0, -0.32391742, 0.94608533, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraOrbit/CameraPitch"]
-position = Vector3(0, 0, 6.8)
+[node name="Camera3D" type="Camera3D" parent="CameraOrbit/CameraPitch" unique_id=445302103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.8)
 current = true
 
-[node name="KeyLight" type="DirectionalLight3D" parent="."]
-rotation_degrees = Vector3(-48, -32, 0)
+[node name="KeyLight" type="DirectionalLight3D" parent="." unique_id=181829440]
+transform = Transform3D(0.8480481, 0.3938068, -0.35458517, 0, 0.66913056, 0.74314487, 0.52991927, -0.63022256, 0.5674549, 0, 0, 0)
 light_energy = 1.8
 shadow_enabled = true
 
-[node name="Cube" type="MeshInstance3D" parent="."]
-position = Vector3(0, 1, 0)
-mesh = SubResource("BoxMesh_cube")
+[node name="Cube" type="MeshInstance3D" parent="." unique_id=1146012972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5053134, 2.3839576, -0.6360121)
 material_override = SubResource("StandardMaterial3D_cube")
+mesh = SubResource("BoxMesh_cube")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0.05, 0)
-mesh = SubResource("PlaneMesh_floor")
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1674998524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 material_override = SubResource("StandardMaterial3D_floor")
+mesh = SubResource("PlaneMesh_floor")
